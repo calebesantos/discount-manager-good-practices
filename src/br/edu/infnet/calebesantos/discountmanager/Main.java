@@ -6,8 +6,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		DiscountManager discountManager = DiscountManagerInjector.getDiscountManager();
-		double discount = discountManager.ApplyDiscount(5.0, AccountType.Standard, 5);
-		System.out.println(discount);
+		double priceWithDiscount = discountManager.ApplyDiscount(5.0, AccountType.Standard, 5);
+		System.out.println(priceWithDiscount);
 	}
 
 }
