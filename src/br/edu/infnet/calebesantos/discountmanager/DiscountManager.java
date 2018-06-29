@@ -27,7 +27,7 @@ public class DiscountManager
     {
         double priceWithDiscount = 0;
 
-        double disc = (accountTimeInYears > 5) ? (double)5 / 100 : (double)accountTimeInYears / 100;
+        double accountTimeDiscount = (accountTimeInYears > 5) ? (double)5 / 100 : (double)accountTimeInYears / 100;
 
         if (accountType == 1)
         {
@@ -35,15 +35,15 @@ public class DiscountManager
         }
         else if (accountType == 2)
         {
-            priceWithDiscount = (originalPrice - (0.1 * originalPrice)) - disc * (originalPrice - (0.1 * originalPrice));
+            priceWithDiscount = (originalPrice - (0.1 * originalPrice)) - accountTimeDiscount * (originalPrice - (0.1 * originalPrice));
         }
         else if (accountType == 3)
         {
-            priceWithDiscount = (0.7 * originalPrice) - disc * (0.7 * originalPrice);
+            priceWithDiscount = (0.7 * originalPrice) - accountTimeDiscount * (0.7 * originalPrice);
         }
         else if (accountType == 4)
         {
-            priceWithDiscount = (originalPrice - (0.5 * originalPrice)) - disc * (originalPrice - (0.5 * originalPrice));
+            priceWithDiscount = (originalPrice - (0.5 * originalPrice)) - accountTimeDiscount * (originalPrice - (0.5 * originalPrice));
         }
 
         return priceWithDiscount;
