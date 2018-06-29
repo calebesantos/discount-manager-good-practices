@@ -1,10 +1,13 @@
 package br.edu.infnet.calebesantos.discountmanager;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import br.edu.infnet.calebesantos.discountmanager.accounts.factories.AccountFactory;
+import br.edu.infnet.calebesantos.discountmanager.accounts.interfaces.Account;
 import br.edu.infnet.calebesantos.discountmanager.discounts.factories.DiscountFactory;
 import br.edu.infnet.calebesantos.discountmanager.discounts.interfaces.Discount;
+import br.edu.infnet.calebesantos.discountmanager.discounts.metadata.DiscountType;
+import br.edu.infnet.calebesantos.discountmanager.discounts.models.DiscountOptions;
 
 /**
  * DiscountManager ------------------------
@@ -26,18 +29,20 @@ import br.edu.infnet.calebesantos.discountmanager.discounts.interfaces.Discount;
  **/
 public class DiscountManager {
 	private final DiscountFactory _discountFactory;
+	private final AccountFactory _accountFactory;
 
-	public DiscountManager(DiscountFactory discountFactory) {
+	public DiscountManager(DiscountFactory discountFactory, AccountFactory accountFactory) {
 		_discountFactory = discountFactory;
+		_accountFactory = accountFactory;
 	}
 
 	public double ApplyDiscount(double originalPrice, AccountType accountType, int accountTimeInYears) {
-		Discount accountTimeDiscount = _discountFactory.getDiscountByAccountTimeInYears(accountTimeInYears);
-		Discount accountTypeDiscount = _discountFactory.getDiscountByAccountType(accountType);
+		DiscountOptions discountOptions = new DiscountOptions(accountTimeInYears);
 
-		List<Discount> descontos = new ArrayList<>();
-		descontos.add(accountTimeDiscount);
-		descontos.add(accountTypeDiscount);
+		Account account = _accountFactory.getAccountByType(accountType);
+		List<DiscountType> accountDiscounts = account.getDiscounts();
+
+		List<Discount> descontos = _discountFactory.getDiscountsByDiscountTypeList(accountDiscounts, discountOptions);
 
 		return ApplyDiscount(originalPrice, descontos);
 	}
