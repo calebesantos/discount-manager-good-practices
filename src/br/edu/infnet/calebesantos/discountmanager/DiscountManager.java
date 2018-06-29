@@ -23,29 +23,29 @@ package br.edu.infnet.calebesantos.discountmanager;
  **/
 public class DiscountManager
 {
-    public double Calculate(double amount, int type, int years)
+    public double ApplyDiscount(double originalPrice, int accountType, int accountTimeInYears)
     {
-        double result = 0;
+        double priceWithDiscount = 0;
 
-        double disc = (years > 5) ? (double)5 / 100 : (double)years / 100;
+        double disc = (accountTimeInYears > 5) ? (double)5 / 100 : (double)accountTimeInYears / 100;
 
-        if (type == 1)
+        if (accountType == 1)
         {
-            result = amount;
+            priceWithDiscount = originalPrice;
         }
-        else if (type == 2)
+        else if (accountType == 2)
         {
-            result = (amount - (0.1 * amount)) - disc * (amount - (0.1 * amount));
+            priceWithDiscount = (originalPrice - (0.1 * originalPrice)) - disc * (originalPrice - (0.1 * originalPrice));
         }
-        else if (type == 3)
+        else if (accountType == 3)
         {
-            result = (0.7 * amount) - disc * (0.7 * amount);
+            priceWithDiscount = (0.7 * originalPrice) - disc * (0.7 * originalPrice);
         }
-        else if (type == 4)
+        else if (accountType == 4)
         {
-            result = (amount - (0.5 * amount)) - disc * (amount - (0.5 * amount));
+            priceWithDiscount = (originalPrice - (0.5 * originalPrice)) - disc * (originalPrice - (0.5 * originalPrice));
         }
 
-        return result;
+        return priceWithDiscount;
     }
 }
