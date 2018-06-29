@@ -25,7 +25,7 @@ public class DiscountManager
 {
 	private final double PERCENTUAL_DESCONTO_PADRAO = 0.1;
 	private final double PERCENTUAL_DESCONTO_VIP = 0.5;
-	private final double PERCENTUAL_DESCONTO_PREMIUM = 0.7;
+	private final double PERCENTUAL_DESCONTO_PREMIUM = 0.3;
 
     public double ApplyDiscount(double originalPrice, AccountType accountType, int accountTimeInYears)
     {
@@ -41,10 +41,10 @@ public class DiscountManager
         		priceWithDiscount = (originalPrice - (PERCENTUAL_DESCONTO_PADRAO * originalPrice)) - accountTimeDiscount * (originalPrice - (PERCENTUAL_DESCONTO_PADRAO * originalPrice));
             	break;
         	case Premium:
-            	priceWithDiscount = (PERCENTUAL_DESCONTO_VIP * originalPrice) - accountTimeDiscount * (PERCENTUAL_DESCONTO_VIP * originalPrice);
+            	priceWithDiscount = (originalPrice - (PERCENTUAL_DESCONTO_PREMIUM * originalPrice)) - accountTimeDiscount * (originalPrice - (PERCENTUAL_DESCONTO_PREMIUM * originalPrice));
             	break;
         	case Vip:
-        		priceWithDiscount = (originalPrice - (PERCENTUAL_DESCONTO_PREMIUM * originalPrice)) - accountTimeDiscount * (originalPrice - (PERCENTUAL_DESCONTO_PREMIUM * originalPrice));
+        		priceWithDiscount = (originalPrice - (PERCENTUAL_DESCONTO_VIP * originalPrice)) - accountTimeDiscount * (originalPrice - (PERCENTUAL_DESCONTO_VIP * originalPrice));
         		break;
         }
 
