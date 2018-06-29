@@ -29,25 +29,27 @@ public class DiscountManager
 
     public double ApplyDiscount(double originalPrice, AccountType accountType, int accountTimeInYears)
     {
-        double priceWithDiscount = originalPrice;
-
         double accountTimeDiscount = (accountTimeInYears > 5) ? (double)5 / 100 : (double)accountTimeInYears / 100;
-
+        double discount = 0;
         switch (accountType) {
-        	case Visitante:
-	        	priceWithDiscount = originalPrice;
-	        	break;
         	case Padrao:
-        		priceWithDiscount = (originalPrice - (PERCENTUAL_DESCONTO_PADRAO * originalPrice)) - accountTimeDiscount * (originalPrice - (PERCENTUAL_DESCONTO_PADRAO * originalPrice));
+        		discount = PERCENTUAL_DESCONTO_PADRAO;
             	break;
         	case Premium:
-            	priceWithDiscount = (originalPrice - (PERCENTUAL_DESCONTO_PREMIUM * originalPrice)) - accountTimeDiscount * (originalPrice - (PERCENTUAL_DESCONTO_PREMIUM * originalPrice));
+        		discount = PERCENTUAL_DESCONTO_PREMIUM;
             	break;
         	case Vip:
-        		priceWithDiscount = (originalPrice - (PERCENTUAL_DESCONTO_VIP * originalPrice)) - accountTimeDiscount * (originalPrice - (PERCENTUAL_DESCONTO_VIP * originalPrice));
+        		discount = PERCENTUAL_DESCONTO_VIP;
         		break;
+        	case Visitante:
+				discount = 0;
+				break;
         }
 
-        return priceWithDiscount;
+        return ApplyDiscount(originalPrice, accountTimeDiscount, discount);
     }
+
+	private double ApplyDiscount(double originalPrice, double accountTimeDiscount, double discountPercent) {
+		return (originalPrice - (discountPercent * originalPrice)) - accountTimeDiscount * (originalPrice - (discountPercent * originalPrice));
+	}
 }
