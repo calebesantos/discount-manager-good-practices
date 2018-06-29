@@ -23,9 +23,13 @@ package br.edu.infnet.calebesantos.discountmanager;
  **/
 public class DiscountManager
 {
+	private final double PERCENTUAL_DESCONTO_PADRAO = 0.1;
+	private final double PERCENTUAL_DESCONTO_VIP = 0.5;
+	private final double PERCENTUAL_DESCONTO_PREMIUM = 0.7;
+
     public double ApplyDiscount(double originalPrice, AccountType accountType, int accountTimeInYears)
     {
-        double priceWithDiscount = 0;
+        double priceWithDiscount = originalPrice;
 
         double accountTimeDiscount = (accountTimeInYears > 5) ? (double)5 / 100 : (double)accountTimeInYears / 100;
 
@@ -34,13 +38,13 @@ public class DiscountManager
 	        	priceWithDiscount = originalPrice;
 	        	break;
         	case Padrao:
-        		priceWithDiscount = (originalPrice - (0.1 * originalPrice)) - accountTimeDiscount * (originalPrice - (0.1 * originalPrice));
+        		priceWithDiscount = (originalPrice - (PERCENTUAL_DESCONTO_PADRAO * originalPrice)) - accountTimeDiscount * (originalPrice - (PERCENTUAL_DESCONTO_PADRAO * originalPrice));
             	break;
         	case Premium:
-            	priceWithDiscount = (0.7 * originalPrice) - accountTimeDiscount * (0.7 * originalPrice);
+            	priceWithDiscount = (PERCENTUAL_DESCONTO_VIP * originalPrice) - accountTimeDiscount * (PERCENTUAL_DESCONTO_VIP * originalPrice);
             	break;
         	case Vip:
-        		priceWithDiscount = (originalPrice - (0.5 * originalPrice)) - accountTimeDiscount * (originalPrice - (0.5 * originalPrice));
+        		priceWithDiscount = (originalPrice - (PERCENTUAL_DESCONTO_PREMIUM * originalPrice)) - accountTimeDiscount * (originalPrice - (PERCENTUAL_DESCONTO_PREMIUM * originalPrice));
         		break;
         }
 
