@@ -1,8 +1,8 @@
 package br.edu.infnet.calebesantos.discountmanager;
 
 public enum AccountType {
-	Visitante,
-    Padrao,
+	Visitor,
+    Standard,
     Premium,
     Vip
 }
